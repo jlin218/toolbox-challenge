@@ -23,15 +23,4 @@ img{
 	height:100px;
 	border: 5px solid black;
 	float: left;
-/*	margin:0 0 0 0;
-	width:150px;
-	height:150px;
-	padding-right: 0;
-	padding-left: 0;
-
-
-	width: $(window).width()/4;
-	height: $(window).height()/4;
-*/
-
 }
