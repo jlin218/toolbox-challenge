@@ -1,4 +1,5 @@
 "use strict";
+$(onReady);
 var pairsLeft;
 var numClicks = 0;
 var startTime;
