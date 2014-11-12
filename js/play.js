@@ -1,17 +1,25 @@
 "use strict";
 $(onReady);
+function onReady(){
+	for(var i = 0 ; i < 16; i++){
+		var name = '#' + "pic" + i;
+		var newTile = $(name);
+		newTile.attr('src', 'img/tile-back.png');
+		newTile.attr('alt', 'grey');
+	}
+	document.getElementById('suggestion').innerHTML = 'CLICK PLAY TO START';
+	$('#play').click(function(){
+		clickstart();
+		startTime = _.now();
+		timer = window.setInterval(onTimer, 1000);
+	});
+}
+
 var pairsLeft;
 var numClicks = 0;
 var startTime;
 var timer;
 var gameBoard = $('#game-board');
-for(var i = 0 ; i < 16; i++){
-	var name = '#' + "pic" + i;
-	var newTile = $(name);
-	newTile.attr('src', 'img/tile-back.png');
-	newTile.attr('alt', 'grey');
-}
-document.getElementById('suggestion').innerHTML = 'CLICK PLAY TO START';
 
 function clickstart(){
 	pairsLeft = 8;
@@ -38,12 +46,6 @@ function clickstart(){
 		newTile.data('side', true);
 	}
 }
-
-$('#play').click(function(){
-	clickstart();
-	startTime = _.now();
-	timer = window.setInterval(onTimer, 1000);
-});
 
 function onTimer() {
 	var elapsedSeconds = Math.floor((_.now() - startTime) / 1000);
