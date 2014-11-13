@@ -18,7 +18,6 @@ function onReady(){
 		document.getElementById("playingSpace").style.display = "inherit";
 		document.getElementById("winPic").style.display = "none";
 		document.getElementsByTagName('body')[0].style.backgroundImage = "url('img/background1.jpg')";
-
 	});
 }
 
@@ -107,7 +106,6 @@ function compare(value, value2){
 		if (pairsLeft == 0){
 			stopTimer();
 			win();
-			
 			setTimeout(function(){alert("Congratulations!!! You Won!")}, 400);;
 		}
 		return true;
@@ -150,6 +148,8 @@ function win(){
 	document.getElementById("playingSpace").style.display = "none";
 	document.getElementById("winPic").style.display = "inherit";
 	document.getElementsByTagName('body')[0].style.backgroundImage = "url('img/backgroundwin.jpg')";
+	document.getElementById("sound").play();
+
 }
 
 
