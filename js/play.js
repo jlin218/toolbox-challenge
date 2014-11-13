@@ -7,11 +7,18 @@ function onReady(){
 		newTile.attr('src', 'img/tile-back.png');
 		newTile.attr('alt', 'grey');
 	}
+
 	document.getElementById('suggestion').innerHTML = 'CLICK PLAY TO START';
 	$('#play').click(function(){
 		clickstart();
 		startTime = _.now();
 		timer = window.setInterval(onTimer, 1000);
+		document.getElementById('suggestion').innerHTML = 'Click A Tile';
+		document.getElementById('play').innerHTML = 'Restart';
+		document.getElementById("playingSpace").style.display = "inherit";
+		document.getElementById("winPic").style.display = "none";
+		document.getElementsByTagName('body')[0].style.backgroundImage = "url('img/background1.jpg')";
+
 	});
 }
 
@@ -44,6 +51,7 @@ function clickstart(){
 		newTile.data('assocTile', tile);
 		newTile.data('back', 'img/tile-back.png');
 		newTile.data('side', true);
+		newTile.data('matched', false);
 	}
 }
 
@@ -71,14 +79,16 @@ $('#game-board img').click(function(){
 		clickedImage.attr('src', tileData1);
 		clickedImage.attr('alt', tileData2);
 		clickedImage.data('side', tileData3);
+
 		if (numClicks % 2 == 1) {
 			tempSideValue = clickedImage;
 		} else{
+			clickEnabler(false);
 			tempSideValue2 = clickedImage;
 			var compareImage = compare(tempSideValue,tempSideValue2);
 			action(compareImage, tempSideValue, tempSideValue2);
+			setTimeout(function(){clickEnabler(true)}, 1000);
 		}
-
 	}
 	document.getElementById('numOfClicks').innerHTML = Math.floor(numClicks/2);
 });
@@ -88,13 +98,17 @@ function compare(value, value2){
 	var tempSideValue2 = value2.attr('src');
 	if(tempSideValue == tempSideValue2){
 		value.data('side', false);
-		value2.data('side', false);
+		value2.data('side', false);	
+		value.data('matched', true);
+		value2.data('matched', true);
 		pairsLeft -= 1;
 		document.getElementById('suggestion').innerHTML = 'Good Job';
 		document.getElementById('pairsLeft').innerHTML = pairsLeft;
 		if (pairsLeft == 0){
 			stopTimer();
-			alert("Congratulations!!! You Won!");
+			win();
+			
+			setTimeout(function(){alert("Congratulations!!! You Won!")}, 400);;
 		}
 		return true;
 	}else{
@@ -106,6 +120,16 @@ function action(value, clickedImage1, clickedImage2){
 	if(!value){
 		document.getElementById('suggestion').innerHTML = 'They Do not Match';
 		setTimeout(function(){turnBack(clickedImage1, clickedImage2)}, 1000);
+	}
+}
+
+function clickEnabler(trueOrFalse){
+	for (var i = 0; i < 16; i++) {
+		var name = '#' + 'pic' + i;
+		var tileName = $(name);
+		if (!tileName.data('matched')){
+			tileName.data('side', trueOrFalse);
+		}
 	}
 }
 
@@ -122,6 +146,10 @@ function turnBack(clickedImage1,clickedImage2){
 	clickedImage2.data('side', true);
 }
 
-
+function win(){
+	document.getElementById("playingSpace").style.display = "none";
+	document.getElementById("winPic").style.display = "inherit";
+	document.getElementsByTagName('body')[0].style.backgroundImage = "url('img/backgroundwin.jpg')";
+}
 
 

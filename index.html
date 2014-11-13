@@ -7,23 +7,28 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="css/main.css"/>
     </head>
-    <body >
+    <body class="container-fluid">
         <main>
-            <header>
+            <header class = "row">
                 <h1>Memory Game</h1>
             </header>
-            <div class="container-fluid" >
-                <button class="col-xs-1" id="play" span style="cursor:pointer" class="btn btn-primary">Play</button> 
-                <p class="col-xs-1"><a target="_blank" href="http://pbskids.org/caillou/games/memory.html">Help</a></p>     
-                <p class="col-xs-3">Your Play Time:  <b id="timeElasped"> 0 </b></p>
-                <p class="col-xs-3">Tries: <b id="numOfClicks"> 0 </b></p>
-                <p class="col-xs-3">Pairs Left <b id="pairsLeft"> 8 </b></p>
+            <div class = "row">
+                <p class="col-xs-1"><a target="_blank" href="help.html">Help</a></p>     
+                <p class="col-xs-2">Your Play Time:  <b id="timeElasped"> 0 </b></p>
+                <p class="col-xs-2">Tries: <b id="numOfClicks"> 0 </b></p>
+                <p class="col-xs-2">Pairs Left <b id="pairsLeft"> 8 </b></p>
             </div>
         </main>
-        <section class="container-fluid" id="game-board">
-            <h2> Game Board</h2> 
-            <h3 id="suggestion"></h3>
-            <div span style="cursor:pointer">
+        <section id="game-board">
+            <!--<h2> Game Board</h2>--> 
+            <div class = "row"> 
+                <h3 class="col-xs-7" id="suggestion"></h3>
+                <button class="col-xs-5" id="play" span style="cursor:pointer" class="btn btn-primary">Play</button> 
+            </div>
+            <div class = "row"> 
+                <img id="winPic" src="img/winPic.jpg" alt="Picture of You Winning"> 
+            </div>
+            <div class = "row" id = "playingSpace" span style="cursor:pointer">
                 <img id="pic0">
                 <img id="pic1">
                 <img id="pic2">
